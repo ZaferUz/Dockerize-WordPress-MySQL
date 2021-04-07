@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  db:
+    image: mysql:latest
+    container_name: bfe-demo-db
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./backups:/backups
+    environment:
+      MYSQL_DATABASE: bfedemo
+      MYSQL_USER: bfedemo_user
+      MYSQL_PASSWORD: bfedemo_007
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ROOT_PASSWORD: bfedemo_root_007
+  wordpress:
+    image: bfe-demo-wp-php
+    container_name: bfedemo_wordpress
+    restart: always
+    depends_on: ["db"]
+    ports: ["80:80"]
+    links: ["db:db"]
+    volumes:
+      - "./wp-data:/var/www/html"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: bfedemo_wordpress
+      WORDPRESS_DB_USER: bfedemo_wordpress_user
+      WORDPRESS_DB_PASSWORD: bfedemo_007
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    container_name: bfe_php_admin
+    restart: always
+    depends_on: ["db"]
+    ports: ["12000:80"]
+    links: ["db:db"]
+    environment:
+      - PHP_HOST=db
+      - PHP_USER=bfedemo_wordpress_user
+      - PHP_PASSWORD=bfedemo_007
+
+volumes:
+  db_data: {}

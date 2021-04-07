@@ -1,0 +1,6 @@
+FROM wordpress:php7.4
+COPY mount_folder/themes/neve /var/www/html/wp-content/themes/neve/
+#COPY mount_folder/themes/kadence /var/www/html/wp-content/themes/kadence/
+COPY mount_folder/plugins/preferred-languages /var/www/html/wp-content/plugins/prefered-languages/
+#COPY mount_folder/plugins/realy-simple-ssl /var/www/html/wp-content/plugins/realy-simple-ssl/
+# we will use the plugin to enable SSL connection.
