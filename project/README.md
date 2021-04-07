@@ -153,7 +153,7 @@ yum install php-devel
 8. Run: ```make``` 
 9.  Run: ```make install``` 
 
-10. First check the ```xdebug.so``` file in ```/usr/lib/php/20190902```
+10. First check the ```xdebug.so``` file in ```/usr/lib/php/20190902``` (or find the right path )
  
     *Note: if not exist fint and copy it under the path, for example: ```cp modules/xdebug.so /usr/lib/php/20190902```*
 
